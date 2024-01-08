@@ -1,72 +1,62 @@
 #include "lists.h"
 
-/**
- * reverse_listint - reverses a linked list
- * @head: pointer to the first node in the list
- *
- * Return: pointer to the first node in the new list
- */
-void reverse_listint(listint_t **head)
-{
-	listint_t *prev = NULL;
-	listint_t *current = *head;
-	listint_t *next = NULL;
-
-	while (current)
-	{
-		next = current->next;
-		current->next = prev;
-		prev = current;
-		current = next;
-	}
-
-	*head = prev;
-}
-
-/**
- * is_palindrome - checks if a linked list is a palindrome
- * @head: double pointer to the linked list
- *
- * Return: 1 if it is, 0 if not
- */
 int is_palindrome(listint_t **head)
 {
-	listint_t *slow = *head, *fast = *head, *temp = *head, *dup = NULL;
+	listint_t *temp, *first_half, *second_half;
+	int len, n, half;
 
-	if (*head == NULL || (*head)->next == NULL)
+	len = 0;
+	temp = *head;
+	first_half = second_half = *head;
+	if (*head == NULL)
 		return (1);
-
-	while (1)
+	while (temp)
 	{
-		fast = fast->next->next;
-		if (!fast)
-		{
-			dup = slow->next;
-			break;
-		}
-		if (!fast->next)
-		{
-			dup = slow->next->next;
-			break;
-		}
-		slow = slow->next;
+		temp = temp->next;
+		len++;
 	}
-
-	reverse_listint(&dup);
-
-	while (dup && temp)
+	half = len / 2;
+	n = half - 1;
+	if (half == 1)
 	{
-		if (temp->n == dup->n)
-		{
-			dup = dup->next;
-			temp = temp->next;
-		}
+		if (len % 2 == 0)
+			second_half = second_half->next;
 		else
-			return (0);
+			second_half = second_half->next->next;
+	} else
+	{
+		while (n)
+		{
+			first_half = first_half->next;
+			if (len % 2 != 0 && (n > 1))
+				second_half = second_half->next->next;
+			else
+			{
+				if (n > 1)
+					second_half = second_half->next;
+			}
+			n--;
+		}
+		second_half = second_half->next;
 	}
+	return (check(second_half, first_half, *head, half));
+}
 
-	if (!dup)
-		return (1);
+int check(listint_t *scnd_half, listint_t *first_hlf, listint_t *h, int half)
+{
+	listint_t *temp;
+	int i;
 
-	return (0);
+	while (scnd_half)
+	{
+		temp = h;
+		half--;
+		if (scnd_half->n != first_hlf->n)
+			return (0);
+		for (i = 0; i < half; i++)
+			temp = temp->next;
+		first_hlf = temp;
+		scnd_half = scnd_half->next;
+	}
+	return (1);
 }
