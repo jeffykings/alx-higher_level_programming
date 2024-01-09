@@ -24,6 +24,6 @@ listint_t *add_nodeint_end(listint_t **head, const int n);
 void free_listint(listint_t *head);
 
 int is_palindrome(listint_t **head);
-int check(listint_t *scnd_half, listint_t *first_hlf, listint_t *h, int half);
+int check(listint_t *snd_hlf, listint_t *ft_hlf, listint_t *h, int hlf, int ln);
 
 #endif /* LISTS_H */
