@@ -1,5 +1,10 @@
 #include "lists.h"
 
+/**
+ * is_palindrome - checks for palindrome
+ * @head: header of the list
+ * Return: 1 if true or 0 if not
+ */
 int is_palindrome(listint_t **head)
 {
 	listint_t *temp, *first_half, *second_half;
@@ -8,7 +13,7 @@ int is_palindrome(listint_t **head)
 	len = 0;
 	temp = *head;
 	first_half = second_half = *head;
-	if (*head == NULL)
+	if (*head == NULL || (*head)->next == NULL)
 		return (1);
 	while (temp)
 	{
@@ -39,24 +44,40 @@ int is_palindrome(listint_t **head)
 		}
 		second_half = second_half->next;
 	}
-	return (check(second_half, first_half, *head, half));
+	return (check(second_half, first_half, *head, half, len));
 }
 
-int check(listint_t *scnd_half, listint_t *first_hlf, listint_t *h, int half)
+/**
+ * check - for palindrome
+ * @snd_hlf: pointer that moves through the second half of the list
+ * @ft_hlf: pointer that moves through the first half of the list
+ * @h: head of the list
+ * @hlf: integer half of the list
+ * @ln: lenght of the list
+ * Return: 1 for palindrome else 0
+ */
+int check(listint_t *snd_hlf, listint_t *ft_hlf, listint_t *h, int hlf, int ln)
 {
 	listint_t *temp;
-	int i;
+	int i, n = 0;
 
-	while (scnd_half)
+	while (snd_hlf)
 	{
 		temp = h;
-		half--;
-		if (scnd_half->n != first_hlf->n)
+		hlf--;
+		if (snd_hlf->n != ft_hlf->n)
 			return (0);
-		for (i = 0; i < half; i++)
+		for (i = 0; i < hlf; i++)
+		{
 			temp = temp->next;
-		first_hlf = temp;
-		scnd_half = scnd_half->next;
+			if (ln % 2 != 0 && n < 1)
+			{
+				hlf--;
+				n++;
+			}
+		}
+		ft_hlf = temp;
+		snd_hlf = snd_hlf->next;
 	}
 	return (1);
 }
