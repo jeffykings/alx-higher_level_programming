@@ -1,83 +1,72 @@
 #include "lists.h"
 
 /**
- * is_palindrome - checks for palindrome
- * @head: header of the list
- * Return: 1 if true or 0 if not
+ * reverse_listint - reverses a linked list
+ * @head: pointer to the first node in the list
+ *
+ * Return: pointer to the first node in the new list
  */
-int is_palindrome(listint_t **head)
+void reverse_listint(listint_t **head)
 {
-	listint_t *temp, *first_half, *second_half;
-	int len, n, half;
+	listint_t *prev = NULL;
+	listint_t *current = *head;
+	listint_t *next = NULL;
 
-	len = 0;
-	temp = *head;
-	first_half = second_half = *head;
-	if (*head == NULL || (*head)->next == NULL)
-		return (1);
-	while (temp)
+	while (current)
 	{
-		temp = temp->next;
-		len++;
+		next = current->next;
+		current->next = prev;
+		prev = current;
+		current = next;
 	}
-	half = len / 2;
-	n = half - 1;
-	if (half == 1)
-	{
-		if (len % 2 == 0)
-			second_half = second_half->next;
-		else
-			second_half = second_half->next->next;
-	} else
-	{
-		while (n)
-		{
-			first_half = first_half->next;
-			if (len % 2 != 0 && (n > 1))
-				second_half = second_half->next->next;
-			else
-			{
-				if (n > 1)
-					second_half = second_half->next;
-			}
-			n--;
-		}
-		second_half = second_half->next;
-	}
-	return (check(second_half, first_half, *head, half, len));
+
+	*head = prev;
 }
 
 /**
- * check - for palindrome
- * @snd_hlf: pointer that moves through the second half of the list
- * @ft_hlf: pointer that moves through the first half of the list
- * @h: head of the list
- * @hlf: integer half of the list
- * @ln: lenght of the list
- * Return: 1 for palindrome else 0
+ * is_palindrome - checks if a linked list is a palindrome
+ * @head: double pointer to the linked list
+ *
+ * Return: 1 if it is, 0 if not
  */
-int check(listint_t *snd_hlf, listint_t *ft_hlf, listint_t *h, int hlf, int ln)
+int is_palindrome(listint_t **head)
 {
-	listint_t *temp;
-	int i, n = 0;
+	listint_t *slow = *head, *fast = *head, *temp = *head, *dup = NULL;
 
-	while (snd_hlf)
+	if (*head == NULL || (*head)->next == NULL)
+		return (1);
+
+	while (1)
 	{
-		temp = h;
-		hlf--;
-		if (snd_hlf->n != ft_hlf->n)
-			return (0);
-		for (i = 0; i < hlf; i++)
+		fast = fast->next->next;
+		if (!fast)
 		{
-			temp = temp->next;
-			if (ln % 2 != 0 && n < 1)
-			{
-				hlf--;
-				n++;
-			}
+			dup = slow->next;
+			break;
 		}
-		ft_hlf = temp;
-		snd_hlf = snd_hlf->next;
+		if (!fast->next)
+		{
+			dup = slow->next->next;
+			break;
+		}
+		slow = slow->next;
 	}
-	return (1);
+
+	reverse_listint(&dup);
+
+	while (dup && temp)
+	{
+		if (temp->n == dup->n)
+		{
+			dup = dup->next;
+			temp = temp->next;
+		}
+		else
+			return (0);
+	}
+
+	if (!dup)
+		return (1);
+
+	return (0);
 }
