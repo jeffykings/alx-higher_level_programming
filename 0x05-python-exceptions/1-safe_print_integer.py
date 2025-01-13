@@ -10,7 +10,8 @@ def safe_print_integer(value):
     """
 
     try:
-        int(value)
+        if not isinstance(value, int):
+            raise TypeError
     except (TypeError, ValueError):
         return (False)
 
