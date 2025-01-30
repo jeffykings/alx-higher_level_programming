@@ -9,6 +9,9 @@ class Square:
     def __init__(self, size=0, position=(0, 0)):
         """Runs a class is called to initiate a class"""
 
+        if not isinstance(position, tuple) and position[0] < 0 and position[1] < 0:
+            raise TypeError("position must be a tuple of 2 positive integers")
+
         self.__size = size
         self.__position = position
 
@@ -39,7 +42,7 @@ class Square:
     def position(self, value):
         """ setter for position"""
 
-        if not isinstance(value, tuple):
+        if not isinstance(value, tuple) and value[0] < 0 and value[1] < 0:
             raise TypeError("position must be a tuple of 2 positive integers")
         self.__position = value
 
