@@ -9,8 +9,8 @@ class Square:
     def __init__(self, size=0, position=(0, 0)):
         """Runs a class is called to initiate a class"""
 
-        self.__size = size
-        self.__position = position
+        self.size = size
+        self.position = position
 
     @property
     def size(self):
