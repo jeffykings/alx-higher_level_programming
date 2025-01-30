@@ -52,24 +52,16 @@ class Square:
     def my_print(self):
         """prints in stdout the square with the character #"""
 
-        if self.__size == 0:
-            print()
-
-        else:
-            for _ in range(self.__position[1]):
-                print()
-
-            for i in range(self.__size):
-                counter = self.__position[0]
-                while (counter):
-                    print(" ", end="")
-                    counter -= 1
-
-                counter = self.__size
-                while (counter):
-                    print("#", end="")
-                    counter -= 1
-                print()
+        print(self.__str__());
 
     def __str__(self):
-        return self.my_print()
+        if self.__size == 0:
+            return ""
+
+        squared_v = "\n" * self.__position[1]
+
+        for i in range(self.__size):
+            squared_v += " " * self.__position[0]
+            squared_v += "#" * self.__size + "\n"
+
+        return squared_v.rstrip()
