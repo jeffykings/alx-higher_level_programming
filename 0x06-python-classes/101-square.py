@@ -52,7 +52,7 @@ class Square:
     def my_print(self):
         """prints in stdout the square with the character #"""
 
-        print(self.__str__());
+        print(self.__str__())
 
     def __str__(self):
         if self.__size == 0:
