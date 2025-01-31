@@ -2,7 +2,9 @@
 
 """class Magic"""
 
+
 import math
+
 
 class MagicClass:
     """ contains method init, area and circumference"""
