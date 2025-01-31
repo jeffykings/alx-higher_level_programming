@@ -1,4 +1,4 @@
-#!/usr/bin/pythton3
+#!/usr/bin/python3
 
 """class Magic"""
 
@@ -9,7 +9,7 @@ class MagicClass:
 
     def __init__(self, radius=0):
 
-        if not isinstance(radius, int) or (not isinstance(radius, float)):
+        if not isinstance(radius, (int, float)):
             raise TypeError("radius must be a number")
 
         self.__radius = radius
