@@ -5,10 +5,10 @@
 def print_square(size):
     """ prints a square with the character #
 
-    Args: 
+    Args:
         size: is the size length of the square must be an int
 
-    Raises: 
+    Raises:
         TypeError: if size is not an int
         ValueError: if size is less than 0
         TypeError: if size is a float and less than 0
