@@ -70,3 +70,12 @@ numpy._core._exceptions._UFuncNoLoopError: ufunc 'matmul' did not contain a loop
 >>> print(lazy_matrix_mul())
 Traceback (most recent call last):
 TypeError: lazy_matrix_mul() missing 2 required positional arguments: 'm_a' and 'm_b'
+
+>>> m_a = [
+... [1, 2],
+... [3, 4, 5]
+... ]
+>>> m_b = m_a
+>>> print(lazy_matrix_mul(m_a, m_b))
+Traceback (most recent call last):
+ValueError: setting an array element with a sequence.
