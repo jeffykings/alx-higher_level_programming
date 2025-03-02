@@ -23,6 +23,13 @@ NameError: name 'bg' is not defined
 [TypeError] name must be an integer
 
 
+Trying to pass a boolean value
+>>> bg = BaseGeometry()
+>>> bg.integer_validator("name", True)
+Traceback (most recent call last):
+TypeError: name must be an integer
+
+
 >>> try:
 ...     bg.integer_validator("age", 0)
 ... except Exception as e:
