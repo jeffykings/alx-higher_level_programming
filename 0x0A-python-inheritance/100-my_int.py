@@ -3,6 +3,7 @@
 """ class inheritance"""
 
 class MyInt(int):
+    """MyInt that inherits from int"""
     def __init__(self, value):
         self.__value = value
 
