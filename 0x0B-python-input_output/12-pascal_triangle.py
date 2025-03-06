@@ -11,7 +11,7 @@ def pascal_triangle(n):
     Args:
         n: size of the triangle
 
-    Return: a list of lists of integers representing the Pascal’s 
+    Return: a list of lists of integers representing the Pascal’s
             triangle of n or an empty list if n <= 0
     """
 
