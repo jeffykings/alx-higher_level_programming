@@ -280,10 +280,20 @@ class TestArea(unittest.TestCase):
 class Testdisplay(unittest.TestCase):
     """tests display"""
     def test_dispaly(self):
-        output1 = "##\n##"
+        output1 = f"##\n##"
 
         r2 = Rectangle(2, 2)
         self.assertEqual(r2.display(), output1)
+
+        output2 = f"
+
+        ##\n  ##\n  ##"
+        r3 = Rectangle(2, 3, 2, 2)
+        self.assertEqual(r3.display(), output2)
+
+        output3 = " ###\n ###"
+        r4 = Rectangle(3, 2, 1, 0)
+        self.assertEqual(r4.display(), output3)
 
 class Teststr(unittest.TestCase):
     """test for str"""
