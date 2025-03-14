@@ -2,7 +2,7 @@
 
 """Square that inherits from rectangle"""
 from models.rectangle import Rectangle
-from models.base import Base
+
 
 class Square(Rectangle):
     """square class"""
