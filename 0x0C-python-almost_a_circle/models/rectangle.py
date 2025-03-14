@@ -110,7 +110,8 @@ class Rectangle(Base):
                 setattr(self, key, value)
 
     def to_dictionary(self):
-        return { 'x': self.x, 'y': self.y, 'id': self.id, 'height': self.height, 'width': self.width}
+        return {'x': self.x, 'y': self.y, 'id': self.id, 'height': self.height,
+                'width': self.width}
 
     def __str__(self):
         return (f"[Rectangle] ({self.id}) {self.__x}/{self.__y} - "
