@@ -94,13 +94,17 @@ class Rectangle(Base):
             print(" " * self.__x, end="")
             print("#" * self.__width)
 
-    def update(self, *args):
-        lst = ["id", "width", "height", "x", "y"]
-        i = 0
+    def update(self, *args, **kwargs):
+        if  args:
+            lst = ["id", "width", "height", "x", "y"]
+            i = 0
 
-        for value in args:
-            setattr(self, lst[i], value)
-            i += 1
+            for value in args:
+                setattr(self, lst[i], value)
+                i += 1
+        else:
+            for key, value in kwargs.items():
+                setattr(self, key, value)
 
     def __str__(self):
         return f"[Rectangle] ({self.id}) {self.__x}/{self.__y} - {self.__width}/{self.__height}"
