@@ -9,7 +9,7 @@ file_path = "Rectangle.json"
 if os.path.exists(file_path):
     os.remove(file_path)
 
-list_objs = []
+list_objs = None
 expected_list = []
 Rectangle.save_to_file(list_objs)
 
