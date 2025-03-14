@@ -34,7 +34,7 @@ class Base:
             lst.append(dictionary)
 
         json_dictionary = cls.to_json_string(lst)
-        name = list_objs[1].__class__.__name__
+        name = cls.__name__
 
         with open(f"{name}.json", "w", encoding="utf-8") as file:
             file.write(json_dictionary)
