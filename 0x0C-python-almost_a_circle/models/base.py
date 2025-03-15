@@ -76,6 +76,36 @@ class Base:
     @classmethod
     def load_from_file(cls):
         """that returns a list of instances"""
+        filename = f"{cls.__name__}.csv"
+
+        if not os.path.exists(filename):
+            return []
+
+        with open(filename, "r", encoding="utf-8") as file:
+            data = cls.from_json_string(file.read())
+
+        return [cls.create(**i) for i in data]
+
+    @classmethod
+    def save_to_file_csv(cls, list_objs):
+        """writes the JSON string representation of list_objs to a file"""
+        lst = []
+
+        if list_objs is not None:
+            for i in list_objs:
+                dictionary = i.to_dictionary()
+                lst.append(dictionary)
+
+        json_dictionary = cls.to_json_string(lst)
+        name = cls.__name__
+
+        with open(f"{name}.csv", "w", encoding="utf-8") as file:
+            file.write(json_dictionary)
+
+    @classmethod
+    def load_from_file_csv(cls):
+        """that returns a list of instances"""
+
         filename = f"{cls.__name__}.json"
 
         if not os.path.exists(filename):
