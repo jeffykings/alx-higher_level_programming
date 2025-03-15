@@ -3,6 +3,7 @@
 """ class base """
 import json
 import os
+import csv
 
 
 class Base:
@@ -96,22 +97,29 @@ class Base:
                 dictionary = i.to_dictionary()
                 lst.append(dictionary)
 
-        json_dictionary = cls.to_json_string(lst)
         name = cls.__name__
 
+        if cls.__name__ == "Rectangle":
+            fieldname = ["id", "width", "height", "x", "y"]
+        else:
+            fieldname = ["id", "size", "x", "y"]
+
         with open(f"{name}.csv", "w", encoding="utf-8") as file:
-            file.write(json_dictionary)
+            csv_writer = csv.DictWriter(file, fieldnames=fieldname)
+
+            csv_writer.writeheader()
+            csv_writer.writerows(lst)
 
     @classmethod
     def load_from_file_csv(cls):
         """that returns a list of instances"""
 
-        filename = f"{cls.__name__}.json"
+        filename = f"{cls.__name__}.csv"
 
         if not os.path.exists(filename):
             return []
 
         with open(filename, "r", encoding="utf-8") as file:
-            data = cls.from_json_string(file.read())
+            data = list(csv.DictReader(file))
 
-        return [cls.create(**i) for i in data]
+        return [cls.create(**{k: int(v) for k, v in i.items()}) for i in data]
