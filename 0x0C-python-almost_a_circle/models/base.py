@@ -85,4 +85,3 @@ class Base:
             data = cls.from_json_string(file.read())
 
         return [cls.create(**i) for i in data]
-
