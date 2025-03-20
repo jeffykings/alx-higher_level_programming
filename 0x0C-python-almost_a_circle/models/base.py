@@ -138,29 +138,32 @@ class Base:
         t.pencolor("blue")
         t.fillcolor("black")
         t.pensize(3)
+
+        screen = turtle.Screen()
         screen.bgcolor("white")
 
-        for i in list_rectangles:
-            dic_of_object = i.to_dictionary()
+        for rec in list_rectangles:
 
             t.penup()
-            t.goto(dic_of_obj["x"], dic_of_obj["y"])
+            t.goto(rec.x, rec.y)
             t.pendown()
 
+            t.begin_fill()
             for j in range(4):
-                t.forward(dic_of_obj["width"])
+                t.forward(rec.width)
                 t.right(90)
-                t.forward(dic_of_obj["height"])
+                t.forward(rec.height)
+                t.right(90)
+            t.end_fill()
 
-        for i in list_squares:
-            dic_of_object = i.to_dictionary()
-
+        for square in list_squares:
             t.penup()
-            t.goto(dic_of_obj["x"], dic_of_obj["y"])
+            t.goto(square.x, square.y)
             t.pendown()
 
+            t.begin_fill()
             for j in range(4):
-                t.forward(dic_of_obj["size"])
+                t.forward(square.size)
                 t.right(90)
-
-        turtle.done()
+            t.end_fill()
+        turtle.exitonclick()
