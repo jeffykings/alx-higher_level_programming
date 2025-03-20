@@ -149,7 +149,7 @@ class Base:
             t.pendown()
 
             t.begin_fill()
-            for j in range(4):
+            for j in range(2):
                 t.forward(rec.width)
                 t.right(90)
                 t.forward(rec.height)
