@@ -4,6 +4,7 @@
 import json
 import os
 import csv
+import turtle
 
 
 class Base:
@@ -123,3 +124,43 @@ class Base:
             data = list(csv.DictReader(file))
 
         return [cls.create(**{k: int(v) for k, v in i.items()}) for i in data]
+
+    @staticmethod
+    def draw(list_rectangles, list_squares):
+        """ opens a window and draws all the Rectangles and Squares
+
+        Args:
+            list_rectangles: list of rectangles
+            ist_squares: list of squares
+        """
+
+        t = turtle.Turtle()
+        t.pencolor("blue")
+        t.fillcolor("black")
+        t.pensize(3)
+        screen.bgcolor("white")
+
+        for i in list_rectangles:
+            dic_of_object = i.to_dictionary()
+
+            t.penup()
+            t.goto(dic_of_obj["x"], dic_of_obj["y"])
+            t.pendown()
+
+            for j in range(4):
+                t.forward(dic_of_obj["width"])
+                t.right(90)
+                t.forward(dic_of_obj["height"])
+
+        for i in list_squares:
+            dic_of_object = i.to_dictionary()
+
+            t.penup()
+            t.goto(dic_of_obj["x"], dic_of_obj["y"])
+            t.pendown()
+
+            for j in range(4):
+                t.forward(dic_of_obj["size"])
+                t.right(90)
+
+        turtle.done()
