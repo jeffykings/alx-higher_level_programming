@@ -8,7 +8,7 @@
 
 SELECT s.title, sg.genre_id
 FROM tv_show_genres AS sg
-LEFT JOIN tv_shows AS s
+RIGHT JOIN tv_shows AS s
 ON sg.show_id = s.id
 ORDER BY s.title ASC, sg.genre_id ASC;
 
