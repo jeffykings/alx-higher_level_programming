@@ -6,7 +6,7 @@
 -- You can use a maximum of two SELECT statement
 -- The database name will be passed as an argument of the mysql command
 
-SELECT S.title
+SELECT DISTINCT S.title
 FROM tv_shows AS s
 LEFT JOIN tv_show_genres AS sg
 ON s.id = sg.show_id
