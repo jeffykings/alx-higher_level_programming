@@ -14,6 +14,6 @@ WHERE NOT EXISTS (
 	JOIN tv_genres AS g
 	ON sg.genre_id = g.id
 	WHERE sg.show_id = s.id
-	  AND g.name = "Comedy"
+	  AND g.name = 'Comedy'
 )
 ORDER BY s.title ASC;
