@@ -6,11 +6,11 @@
 -- The database name will be passed as an argument of the mysql command
 
 
-SELECT g.name, SUM(sr.rating) AS rating
+SELECT g.name, SUM(sr.rate) AS rating
 FROM tv_genres AS g
 LEFT JOIN tv_show_genres AS sg
 ON g.id = sg.genre_id
 LEFT JOIN tv_show_ratings AS sr
 ON sg.show_id = sr.show_id
 GROUP BY g.id
-ORDER BY rating DESC
+ORDER BY rating DESC;
