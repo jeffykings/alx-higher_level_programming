@@ -10,7 +10,7 @@ SELECT S.title
 FROM tv_shows AS s
 LEFT JOIN tv_show_genres AS sg
 ON s.id = sg.show_id
-JOIN tv_genres AS g
+LEFT JOIN tv_genres AS g
 ON sg.genre_id = g.id
 AND g.name = 'Comedy'
 WHERE g.id IS NULL
