@@ -8,12 +8,10 @@
 
 SELECT S.title
 FROM tv_shows AS s
-WHERE NOT EXISTS (
-	SELECT 1
-	FROM tv_show_genres AS sg
-	JOIN tv_genres AS g
-	ON sg.genre_id = g.id
-	WHERE sg.show_id = s.id
-	  AND g.name = 'Comedy'
-)
+LEFT JOIN tv_show_genres AS sg
+ON s.id = sg.show_id
+JOIN tv_genres AS g
+ON sg.genre_id = g.id
+AND g.name = 'Comedy'
+WHERE g.id IS NULL
 ORDER BY s.title ASC;
